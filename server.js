@@ -8,36 +8,21 @@ var convert = require('./src/cssobj-converter.js')
 var esformatter = require('esformatter')
 var util = require('util')
 
-/**
- *  Define the sample application.
- */
 var SampleApp = function () {
   //  Scope.
   var self = this
 
-  /*  ================================================================  */
-  /*  Helper functions.                                                 */
-  /*  ================================================================  */
-
-  /**
-   *  Set up server IP address and port # using env variables/defaults.
-   */
   self.setupVariables = function () {
     //  Set the environment variables we need.
     self.ipaddress = process.env.NODE_IP
-    self.port = process.env.NODE_PORT || 3000
+    self.port = process.env.NODE_PORT || 8080
 
     if (typeof self.ipaddress === 'undefined') {
-      //  Log errors on OpenShift but continue w/ 127.0.0.1 - this
-      //  allows us to run/test the app locally.
-      console.warn('No OPENSHIFT_NODEJS_IP var, using 127.0.0.1')
+      console.warn('No OPENSHIFT_NODEJS_IP var, using 0.0.0.0')
       self.ipaddress = '0.0.0.0'
     }
   }
 
-  /**
-   *  Populate the cache.
-   */
   self.populateCache = function () {
     if (typeof self.zcache === 'undefined') {
       self.zcache = { 'index.html': '' }
@@ -47,10 +32,6 @@ var SampleApp = function () {
     self.zcache['index.html'] = fs.readFileSync('./public/index.html')
   }
 
-  /**
-   *  Retrieve entry (content) from cache.
-   *  @param {string} key  Key identifying content to retrieve from cache.
-   */
   self.cache_get = function (key) { return self.zcache[key]; }
 
   /**

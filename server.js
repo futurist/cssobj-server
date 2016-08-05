@@ -44,7 +44,7 @@ var SampleApp = function () {
     }
 
     //  Local cache for static content.
-    self.zcache['index.html'] = fs.readFileSync('./node_modules/cssobj-core/play/index.html')
+    self.zcache['index.html'] = fs.readFileSync('./public/index.html')
   }
 
   /**

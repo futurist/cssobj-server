@@ -1,0 +1,146 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>cssobj playground</title>
+  <!--[if lte IE 8]>
+      <script type="text/javascript" src="http://1111hui.com/js/es5-shim.min.js"></script>
+      <script type="text/javascript" src="http://1111hui.com/js/json3.min.js"></script>
+      <![endif]-->
+
+  <script type="text/javascript" src="../dist/cssobj-core.iife.js"></script>
+  <script type="text/javascript" src="../../cssobj-plugin-value-default-unit/dist/cssobj-plugin-value-default-unit.iife.js"></script>
+  <script type="text/javascript" src="../../cssobj-plugin-post-gencss/dist/cssobj-plugin-post-gencss.iife.js"></script>
+  <script type="text/javascript" src="../../cssobj-plugin-post-cssom/dist/cssobj-plugin-post-cssom.iife.js"></script>
+  <script type="text/javascript" src="pagecss.js"></script>
+  <script type="text/javascript">
+  var css = cssobj_core(
+    {
+      local:false,
+      plugins:
+     {
+       post:[
+         // cssobj_plugin_post_gencss(),
+         // cssobj_plugin_post_stylize()
+         cssobj_plugin_post_cssom()
+       ],
+       value: cssobj_plugin_value_default_unit('px')
+     }
+    }
+  )(pagecss)
+
+var windowWidth = function(){return document.documentElement.offsetWidth-4}
+var windowHeight = function(){return document.documentElement.offsetHeight}
+
+var refh3 = css.ref.h3
+var refLeft = css.ref.left.obj
+var refRight = css.ref.right.obj
+var reftextarea = css.ref.textarea.obj
+// for page css
+function h3Height() {
+  var h3Val = refh3.lastVal
+  return h3Val.fontSize * h3Val.lineHeight + h3Val.marginTop + h3Val.marginBottom
+}
+
+reftextarea.height=function(last, node, result) {
+  var w = windowWidth()
+  var h = windowHeight()
+  return w<900? h/2 - h3Height() : h-h3Height()
+}
+
+refh3.obj.left = function(){ return 10}
+refh3.obj.color = function() {
+  var w = windowWidth()
+  return w<900? 'blue' : 'green'
+}
+delete reftextarea.color
+delete pagecss.table
+
+refRight.width = refLeft.width = function(last, node, result) {
+  var w = windowWidth()
+  return w<900? w : w/2
+}
+refh3.obj.fontSize = function(last, node, result) {
+  return result.data.resize ? last : last+1
+}
+css.ref.ff.obj.textarea = {
+  color: 'red'
+}
+pagecss.div = {
+  color: 'red'
+}
+window.onresize = function(){
+  css.update({resize:true})
+}
+// console.log(css)
+
+  </script>
+</head>
+<body>
+  <div class="left div">
+    <h3 title="a,b">JS Object: (paste/change below)</h3>
+    <textarea id="src" oninput="convert(this)"></textarea>
+  </div>
+  <div class="right div">
+    <h3 id="h3">CSS Text: (paste/change below)</h3>
+    <textarea id="css" oninput="parse(this)"></textarea>
+  </div>
+  <script type="text/javascript">
+
+var testData = {
+  div: { fontSize: '12px', color: 'blue' },
+  '@media (max-width: 800px)': {
+    '.active': {
+      color: 'purple',
+      'div &': {
+        color: 'red'
+      }
+    }
+  }
+}
+
+var src = document.getElementById('src')
+src.value = JSON.stringify(testData,null,2)
+
+var opt = {local:1, propSugar:1, plugins:{
+  post: cssobj_plugin_post_gencss({indent:'  '})
+  // value: function(val, key, node){ return /width|height|top|left/.test(key) ? val+'px' : val }
+}, localNames:{p:'_prefix_p'}}
+
+var cssobjFunc = cssobj_core(opt)
+
+var testObj, testD, ret
+function convert(el) {
+  try{
+    var func = new Function('return '+el.value)
+    testObj = func()
+    ret = cssobjFunc(testObj)
+    document.getElementById('css').value = ret.css
+    // console.log(ret)
+
+  }catch(e){
+    // console.log(e)
+  }
+}
+convert(src)
+
+function parse(el){
+  var value = el.value
+
+  // server using cssobj-converter project: npm run server
+  fetch('/converter', {method:'POST', body:JSON.stringify({text:value})})
+    .then(function(v){
+      if(v.ok)
+        v.text().then(function(text){ src.value = text})
+    })
+}
+
+
+
+h3.onclick=function() {
+  css.update()
+}
+
+window.onresize()
+
+  </script>
+</body>

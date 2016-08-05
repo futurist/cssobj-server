@@ -5,7 +5,6 @@
   "private": true,
   "main": "start.js",
   "scripts": {
-    "postinstall": "rm public/cssobj* -rf && mv node_modules/cssobj* public",
     "start": "node --use_strict start.js"
   },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",

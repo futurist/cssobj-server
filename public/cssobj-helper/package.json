@@ -1,0 +1,71 @@
+{
+  "_args": [
+    [
+      "cssobj-helper@github:cssobj/cssobj-helper",
+      "/home/1111hui/public_html/github/rhc/convertcssobj/node_modules/cssobj-plugin-post-cssom"
+    ]
+  ],
+  "_from": "cssobj/cssobj-helper",
+  "_id": "cssobj-helper@0.1.1",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cssobj-helper",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/cssobj/cssobj-helper/master/package.json",
+      "gitUrl": "git://github.com/cssobj/cssobj-helper.git",
+      "httpsUrl": "git+https://github.com/cssobj/cssobj-helper.git",
+      "shortcut": "github:cssobj/cssobj-helper",
+      "ssh": "git@github.com:cssobj/cssobj-helper.git",
+      "sshUrl": "git+ssh://git@github.com/cssobj/cssobj-helper.git",
+      "type": "github"
+    },
+    "name": "cssobj-helper",
+    "raw": "cssobj-helper@github:cssobj/cssobj-helper",
+    "rawSpec": "github:cssobj/cssobj-helper",
+    "scope": null,
+    "spec": "github:cssobj/cssobj-helper",
+    "type": "hosted"
+  },
+  "_requiredBy": [
+    "/cssobj-plugin-post-cssom",
+    "/cssobj-plugin-post-gencss",
+    "/cssobj-plugin-post-stylize",
+    "/cssobj-plugin-value-default-unit"
+  ],
+  "_resolved": "git://github.com/cssobj/cssobj-helper.git#d518a072bec0c2b436c7986c198fb1fd2f97a847",
+  "_shasum": "1154767fcc6b7bf06f4a2021e5b0be7f05922735",
+  "_shrinkwrap": null,
+  "_spec": "cssobj-helper@github:cssobj/cssobj-helper",
+  "_where": "/home/1111hui/public_html/github/rhc/convertcssobj/node_modules/cssobj-plugin-post-cssom",
+  "author": {
+    "email": "jamesyang999@gmail.com",
+    "name": "James Yang"
+  },
+  "bugs": {
+    "url": "https://github.com/cssobj/cssobj-helper/issues"
+  },
+  "dependencies": {},
+  "description": "Helper functions for cssobj.",
+  "devDependencies": {},
+  "gitHead": "d518a072bec0c2b436c7986c198fb1fd2f97a847",
+  "homepage": "https://github.com/cssobj/cssobj-helper#readme",
+  "jsnext:main": "dist/cssobj-helper.es.js",
+  "license": "MIT",
+  "main": "dist/cssobj-helper.cjs.js",
+  "name": "cssobj-helper",
+  "optionalDependencies": {},
+  "readme": "# cssobj-helper\n\nHelper functions for cssobj.\n\n## API\n\nPlease download this repo and read source directly :)\n\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cssobj/cssobj-helper.git"
+  },
+  "scripts": {
+    "make": "rollup -c && uglifyjs dist/cssobj-helper.iife.js -cm -o dist/cssobj-helper.min.js",
+    "report": "cd dist && gzip < cssobj-helper.min.js > cssobj-helper.min.gz && ls -lh && rm -f *.gz",
+    "test": "mocha"
+  },
+  "version": "0.1.1"
+}

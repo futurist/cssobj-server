@@ -1,0 +1,70 @@
+{
+  "_args": [
+    [
+      "cssobj/cssobj-plugin-post-stylize",
+      "/home/1111hui/public_html/github/rhc/convertcssobj"
+    ]
+  ],
+  "_from": "cssobj/cssobj-plugin-post-stylize",
+  "_id": "cssobj-plugin-post-stylize@1.0.0",
+  "_inCache": true,
+  "_installable": true,
+  "_location": "/cssobj-plugin-post-stylize",
+  "_phantomChildren": {},
+  "_requested": {
+    "hosted": {
+      "directUrl": "https://raw.githubusercontent.com/cssobj/cssobj-plugin-post-stylize/master/package.json",
+      "gitUrl": "git://github.com/cssobj/cssobj-plugin-post-stylize.git",
+      "httpsUrl": "git+https://github.com/cssobj/cssobj-plugin-post-stylize.git",
+      "shortcut": "github:cssobj/cssobj-plugin-post-stylize",
+      "ssh": "git@github.com:cssobj/cssobj-plugin-post-stylize.git",
+      "sshUrl": "git+ssh://git@github.com/cssobj/cssobj-plugin-post-stylize.git",
+      "type": "github"
+    },
+    "name": null,
+    "raw": "cssobj/cssobj-plugin-post-stylize",
+    "rawSpec": "cssobj/cssobj-plugin-post-stylize",
+    "scope": null,
+    "spec": "github:cssobj/cssobj-plugin-post-stylize",
+    "type": "hosted"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git://github.com/cssobj/cssobj-plugin-post-stylize.git#46f5129187512f10ca892861b2522755a6a7ff08",
+  "_shasum": "02a66d8eb75c513754824cb028d6ce48d256bfc4",
+  "_shrinkwrap": null,
+  "_spec": "cssobj/cssobj-plugin-post-stylize",
+  "_where": "/home/1111hui/public_html/github/rhc/convertcssobj",
+  "author": {
+    "email": "jamesyang999@gmail.com",
+    "name": "James Yang"
+  },
+  "bugs": {
+    "url": "https://github.com/cssobj/cssobj-plugin-post-stylize/issues"
+  },
+  "dependencies": {
+    "cssobj-helper": "github:cssobj/cssobj-helper"
+  },
+  "description": "Apply css text into browser's style tag, can work with plugin-gencss.",
+  "devDependencies": {},
+  "gitHead": "46f5129187512f10ca892861b2522755a6a7ff08",
+  "homepage": "https://github.com/cssobj/cssobj-plugin-post-stylize#readme",
+  "jsnext:main": "dist/cssobj-plugin-post-stylize.es.js",
+  "license": "MIT",
+  "main": "dist/cssobj-plugin-post-stylize.cjs.js",
+  "name": "cssobj-plugin-post-stylize",
+  "optionalDependencies": {},
+  "readme": "# cssobj-plugin-post-stylize\n\nApply css text into browser's style tag, can work with plugin-gencss.\n\n## Usage\n\n``` javascript\nvar cssobj_core = require('cssobj-core')\nvar pluginGenCSS = require('cssobj-plugin-post-gencss')\nvar pluginStylize = require('cssobj-plugin-post-stylize')\nvar cssobj = cssobj_core({plugins: {post: [pluginGenCSS(), pluginStylize(option)] }})\ncssobj(obj)\n\n// plugin-gencss generated css text will be applied into <head>\n```\n\n## Install\n\n``` javascript\nnpm install cssobj/cssobj-plugin-post-stylize\n```\n\n## API\n\n### `var plugin = pluginStylize(option)`\n\nGet plugin function to apply, pass option.\n\nThe function read `result.css` as css text to insert into `<style>`.\n\n### *PARAMS*\n\n### `option`\n\n - `name` : {string} The id for `<style>` tag, if omit, will using random string.\n\n - `attrs` : {object} The key/val to apply to `<style>` tag as attributes.\n\n### *RETURN*\n\nA function can be as cssobj post plugin.\n\n\n## Example\n\n``` javascript\npluginStylize({name:'index-page-style'})\n\npluginStylize({name:'index-page-style', attrs:{type:'text/css', media:'screen'} })\n```\n\n## Difference between plugin-cssom\n\nThis plugin take simplicy first, just update all css text into `<style>` tag, may have performance issues.\n\n[plugin-cssom](https://github.com/cssobj/cssobj-plugin-post-cssom) take effiency first, it create every css rule and patch rules with `result.diff`\n\nIf you want apply cssobj once, and don't update result frequently, use `plugin-gencss` + `plugin-stylize`\n\nIf you want update result frequently, use `plugin-cssom`, it optimized for this type of usage.\n\n\n\n",
+  "readmeFilename": "README.md",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cssobj/cssobj-plugin-post-stylize.git"
+  },
+  "scripts": {
+    "make": "rollup -c && uglifyjs dist/cssobj-plugin-post-stylize.iife.js -cm -o dist/cssobj-plugin-post-stylize.min.js",
+    "report": "cd dist && gzip < cssobj-plugin-post-stylize.min.js > cssobj-plugin-post-stylize.min.gz && ls -lh && rm -f *.gz",
+    "test": "mocha"
+  },
+  "version": "1.0.0"
+}

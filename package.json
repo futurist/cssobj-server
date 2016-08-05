@@ -5,11 +5,17 @@
   "private": true,
   "main": "start.js",
   "scripts": {
+    "postinstall": "rm public/cssobj* -rf && mv node_modules/cssobj* public",
     "start": "node --use_strict start.js"
   },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "cssobj-core": "github:cssobj/cssobj-core",
+    "cssobj-plugin-post-cssom": "github:cssobj/cssobj-plugin-post-cssom",
+    "cssobj-plugin-post-gencss": "github:cssobj/cssobj-plugin-post-gencss",
+    "cssobj-plugin-post-stylize": "github:cssobj/cssobj-plugin-post-stylize",
+    "cssobj-plugin-value-default-unit": "github:cssobj/cssobj-plugin-value-default-unit",
     "esformatter": "^0.9.6",
     "express": "^4.14.0",
     "postcss": "^5.1.1",

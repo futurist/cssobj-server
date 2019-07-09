@@ -5,7 +5,9 @@
   "private": true,
   "main": "start.js",
   "scripts": {
-    "start": "node --use_strict start.js"
+    "start": "node --use_strict start.js",
+    "snyk-protect": "snyk protect",
+    "prepublish": "npm run snyk-protect"
   },
   "author": "Ionut-Cristian Florescu <ionut.florescu@gmail.com>",
   "license": "ISC",
@@ -19,6 +21,8 @@
     "express": "^4.14.0",
     "postcss": "^5.1.1",
     "postcss-less": "^0.14.0",
-    "postcss-scss": "^0.1.9"
-  }
+    "postcss-scss": "^0.1.9",
+    "snyk": "^1.192.4"
+  },
+  "snyk": true
 }
